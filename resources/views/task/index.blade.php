@@ -9,6 +9,12 @@
 
                 <div class="card-body">
 
+                    <form action="{{ route('tasks.create') }}">
+                    <div class="d-flex justify-content-center">
+                        <input type="submit" class="btn btn-primary text-center"  value="Create task" />
+                        </div>
+                    </form>
+
                     @if(isset($tasks))
 
 
