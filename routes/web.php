@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +17,5 @@ use App\Http\Controllers\HomeController;
 Auth::routes();
 
 Route::get('/', [TasksController::class, 'index']);
-
 
 Route::resource('tasks', 'TasksController');
