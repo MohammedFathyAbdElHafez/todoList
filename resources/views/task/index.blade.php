@@ -35,7 +35,7 @@
                                         <td>{{$task->id}} </td>
                                         <td>{{$task->title}} </td>
                                         <td>{{$task->description}} </td>
-                                        <td>{{$task->status}} </td>
+                                        <td class="{{$task->status}}">{{$task->status}} </td>
                                         <td>
                                             <div class="row">
                                                 <div style="width: 50%;">

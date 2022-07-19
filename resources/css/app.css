@@ -1,0 +1,20 @@
+td.INPROGRESS {
+    background-color: lightgreen;
+    font-weight: bold;
+}
+
+
+td.COMPLETED {
+    background-color: darkturquoise;
+    font-weight: bold;
+}
+
+td.HOLD {
+    background-color: teal;
+    font-weight: bold;
+}
+
+td.CANCELED {
+    background-color: crimson;
+    font-weight: bold;
+}
