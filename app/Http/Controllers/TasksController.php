@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreateTask;
+use App\Events\DeleteTask;
+use App\Events\UpdateTask;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
@@ -52,6 +55,8 @@ class TasksController extends Controller
         $taskModel = new Task();
         $taskModel->create($validatedData);
 
+        $taskEvent = new CreateTask();
+        broadcast($taskEvent);
         return redirect('tasks');
     }
 
@@ -103,6 +108,9 @@ class TasksController extends Controller
         $task->status = $validatedData['status'];
         $task->save();
 
+        $updateEvent = new UpdateTask();
+        broadcast($updateEvent);
+
         return redirect('tasks')->with('message', 'Record Successfully Updated!');
     }
 
@@ -117,6 +125,9 @@ class TasksController extends Controller
         //
         $task = Task::find($id);
         $task->delete();
+
+        $deleteEvent = new DeleteTask();
+        broadcast($deleteEvent);
 
         Session::flash('message', 'Successfully deleted the task!');
         return redirect('tasks');
