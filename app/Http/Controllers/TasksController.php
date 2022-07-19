@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTaskRequest;
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class TasksController extends Controller
@@ -37,9 +40,17 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
         //
+        $validatedData = $request->validated();
+
+        $validatedData['status'] = 'INPROGRESS';
+
+        $taskModel = new Task();
+        $taskModel->create($validatedData);
+
+        return redirect('tasks');
     }
 
     /**
