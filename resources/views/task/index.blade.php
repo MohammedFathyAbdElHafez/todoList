@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Home') }}</div>
 
@@ -13,7 +13,7 @@
 
 
                     <div class="row mt-5 d-flex justify-content-center align-items-center">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
 
                             <table class="table table-bordered">
                                 <thead class="table-dark">
