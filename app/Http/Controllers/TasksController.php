@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class TasksController extends Controller
 {
@@ -73,6 +75,11 @@ class TasksController extends Controller
     public function edit($id)
     {
         //
+        $task = Task::find($id);
+
+        // show the edit form and pass the shark
+        return view('task.edit')
+            ->with('task', $task);
     }
 
     /**
@@ -82,9 +89,21 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
         //
+        $validatedData = $request->validated();
+
+        $task = Task::findOrFail($id);
+
+
+        $task = Task::find($id);
+        $task->title       = $validatedData['title'];
+        $task->description      = $validatedData['description'];
+        $task->status = $validatedData['status'];
+        $task->save();
+
+        return redirect('tasks')->with('message', 'Record Successfully Updated!');
     }
 
     /**
@@ -96,5 +115,10 @@ class TasksController extends Controller
     public function destroy($id)
     {
         //
+        $task = Task::find($id);
+        $task->delete();
+
+        Session::flash('message', 'Successfully deleted the task!');
+        return redirect('tasks');
     }
 }
